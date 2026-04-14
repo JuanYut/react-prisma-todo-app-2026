@@ -21,7 +21,11 @@ const NoteInput = ({ addNote }) => {
         onChange={(e) => setText(e.target.value)}
       />
 
-      <button className="note-input-button" onClick={handleAddNote}>
+      <button
+        className="note-input-button"
+        onClick={handleAddNote}
+        title="Add new note"
+      >
         Add Note
       </button>
     </div>

@@ -22,7 +22,11 @@ const NoteItem = ({
             onChange={(e) => setEditingText(e.target.value)}
             autoFocus
           />
-          <button className="btn btn-save" onClick={() => saveEdit(note.id)}>
+          <button
+            className="btn btn-save"
+            onClick={() => saveEdit(note.id)}
+            title="Save note"
+          >
             Save
           </button>
         </div>

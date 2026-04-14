@@ -11,6 +11,9 @@ import NoteItem from "./components/NoteItem/NoteItem.jsx";
 function App() {
   const [notes, setNotes] = useState([]);
 
+  const [editingId, setEditingId] = useState(null);
+  const [editingText, setEditingText] = useState("");
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -61,7 +64,27 @@ function App() {
     }
   };
 
-  if (loading) return <p>Cargando tareas...</p>;
+  const saveEdit = async (id) => {
+    if (!editingText.trim()) return;
+
+    try {
+      const updated = await updateNote(id, { text: editingText });
+
+      setNotes((prev) => prev.map((n) => (n.id === id ? updated : n)));
+
+      setEditingId(null);
+      setEditingText("");
+    } catch (error) {
+      alert("Failed to edit note. Please try again.");
+    }
+  };
+
+  const startEdit = (note) => {
+    setEditingId(note.id);
+    setEditingText(note.text);
+  };
+
+  if (loading) return <p>Loading notes...</p>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -73,7 +96,7 @@ function App() {
         alignItems: "center",
       }}
     >
-      <h1 style={{ marginBottom: "20px" }}>Notes</h1>
+      <h1 style={{ marginBottom: "20px" }}>Notes by Juan Santillán</h1>
 
       <NoteInput addNote={addNote} />
 
@@ -84,6 +107,11 @@ function App() {
             note={note}
             deleteNote={deleteNote}
             toggleArchived={toggleArchived}
+            editingId={editingId}
+            editingText={editingText}
+            setEditingText={setEditingText}
+            saveEdit={saveEdit}
+            startEdit={startEdit}
           />
         ))}
       </ul>
