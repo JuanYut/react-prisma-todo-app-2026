@@ -26,15 +26,15 @@ export async function handleNotes(req) {
 
   // 2. POST /notes - Create a new note
   if (method === "POST" && url === "/notes") {
-    if (!body || !body.title) {
+    if (!body || !body.text) {
       return {
         status: 400,
-        body: { error: "Title is required" },
+        body: { error: "Text is required" },
       };
     }
 
     const note = await prisma.note.create({
-      data: { title: body.title },
+      data: { text: body.text },
     });
 
     return {
@@ -47,13 +47,13 @@ export async function handleNotes(req) {
   if (noteId) {
     // 3. PATCH /notes/:id - Update an existing note (Edit or Archive)
     if (method === "PATCH") {
-      const { title, completed } = body; // Usamos la constante body definida arriba
+      const { text, completed } = body; // Usamos la constante body definida arriba
 
       const updatedNote = await prisma.note.update({
         where: { id: noteId },
         data: {
           // Spread objects only if the property is defined in the request
-          ...(title !== undefined && { title }),
+          ...(text !== undefined && { text }),
           ...(completed !== undefined && { completed }),
         },
       });

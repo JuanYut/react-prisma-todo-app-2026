@@ -1,0 +1,56 @@
+/* Contenedor principal de la tarjeta (Compacto & Dark) */
+.note-card {
+  background: #1e1e1e; /* Gris oscuro para la tarjeta */
+  border-radius: 10px; /* Bordes un poco más cerrados */
+  padding: 10px 14px; /* Padding reducido para que sea compacta */
+  margin-bottom: 8px; /* Espacio entre tarjetas reducido */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #333; /* Borde sutil */
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s;
+}
+
+.note-card:hover {
+  transform: translateY(-1px);
+  background: #252525;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo cuando la tarea está completada */
+.note-card.completed {
+  background-color: #161410;
+  border-color: #382e1e;
+  width: fit-content; /* La tarjeta solo mide lo que midan sus botones */
+  min-width: 100px; /* Un ancho mínimo para que no se vea colapsada */
+  margin-left: auto; /* La empuja hacia la derecha */
+  margin-right: 0;
+}
+
+.note-card.completed .note-title {
+  text-decoration: line-through;
+  color: #837a6b;
+  display: none;
+}
+
+/* Texto de la tarea */
+.note-content {
+  flex: 1;
+  margin-right: 12px;
+}
+
+.note-title {
+  font-size: 0.95rem; /* Fuente ligeramente más pequeña */
+  color: #eee;
+  font-weight: 500;
+}
+
+/* Grupo de botones */
+.note-actions {
+  display: flex;
+  gap: 6px; /* Espacio entre botones más apretado */
+}
