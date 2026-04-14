@@ -1,0 +1,38 @@
+.filter-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+/* Reutilizando la estética de tus .btn */
+.btn-filter {
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: #333;
+  color: #837a6b; /* Color apagado por defecto */
+}
+
+.btn-filter:hover {
+  background: #252525;
+  color: #eee;
+}
+
+/* Estilo para el botón activo */
+.btn-filter.active {
+  background-color: rgba(51, 154, 240, 0.1); /* Azul sutil como tu btn-edit */
+  color: #339af0;
+  border: 1px solid rgba(51, 154, 240, 0.3);
+}

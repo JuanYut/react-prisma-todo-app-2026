@@ -7,9 +7,11 @@ import {
 } from "./services/api.js";
 import NoteInput from "./components/NoteInput/NoteInput.jsx";
 import NoteItem from "./components/NoteItem/NoteItem.jsx";
+import NoteFilter from "./components/NoteFilter/NoteFilter.jsx";
 
 function App() {
   const [notes, setNotes] = useState([]);
+  const [filterNotes, setFilterNotes] = useState("active");
 
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
@@ -84,6 +86,12 @@ function App() {
     setEditingText(note.text);
   };
 
+  const filteredNotes = notes.filter((note) => {
+    if (filterNotes === "all") return true; // All notes
+    if (filterNotes === "archived") return note.archived; // Archivhed notes
+    return !note.archived; // Default: Active notes
+  });
+
   if (loading) return <p>Loading notes...</p>;
   if (error) return <p>{error}</p>;
 
@@ -100,20 +108,26 @@ function App() {
 
       <NoteInput addNote={addNote} />
 
+      <NoteFilter filterNotes={filterNotes} setFilterNotes={setFilterNotes} />
+
       <ul>
-        {notes.map((note) => (
-          <NoteItem
-            key={note.id}
-            note={note}
-            deleteNote={deleteNote}
-            toggleArchived={toggleArchived}
-            editingId={editingId}
-            editingText={editingText}
-            setEditingText={setEditingText}
-            saveEdit={saveEdit}
-            startEdit={startEdit}
-          />
-        ))}
+        {filteredNotes.length > 0 ? (
+          filteredNotes.map((note) => (
+            <NoteItem
+              key={note.id}
+              note={note}
+              deleteNote={deleteNote}
+              toggleArchived={toggleArchived}
+              editingId={editingId}
+              editingText={editingText}
+              setEditingText={setEditingText}
+              saveEdit={saveEdit}
+              startEdit={startEdit}
+            />
+          ))
+        ) : (
+          <p>No notes to show in this view.</p>
+        )}
       </ul>
     </div>
   );

@@ -41,18 +41,24 @@
 .note-content {
   flex: 1;
   margin-right: 12px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .note-title {
   font-size: 0.95rem; /* Fuente ligeramente más pequeña */
   color: #eee;
   font-weight: 500;
+  white-space: normal; /* Permite múltiples líneas */
+  word-break: break-word; /* Rompe palabras muy largas (como la de tu imagen) */
+  display: block; /* Asegura que el texto respete el contenedor */
 }
 
 /* Grupo de botones */
 .note-actions {
   display: flex;
   gap: 6px; /* Espacio entre botones más apretado */
+  flex-shrink: 0;
 }
 
 /* Estilo base de botones (Más pequeños) */
