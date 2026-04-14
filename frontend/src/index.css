@@ -1,3 +1,4 @@
+/* General page background and layout */
 body {
   background-color: #121212;
   color: #e0e0e0;
@@ -5,4 +6,12 @@ body {
   display: flex;
   justify-content: center;
   font-family: "Inter", sans-serif;
+}
+
+/* Limit container width to maintain a clean card layout */
+ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-width: 400px; /* Controls the maximum width of the list */
 }

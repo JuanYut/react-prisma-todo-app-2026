@@ -47,14 +47,14 @@ export async function handleNotes(req) {
   if (noteId) {
     // 3. PATCH /notes/:id - Update an existing note (Edit or Archive)
     if (method === "PATCH") {
-      const { text, completed } = body; // Usamos la constante body definida arriba
+      const { text, archived } = body; // Usamos la constante body definida arriba
 
       const updatedNote = await prisma.note.update({
         where: { id: noteId },
         data: {
           // Spread objects only if the property is defined in the request
           ...(text !== undefined && { text }),
-          ...(completed !== undefined && { completed }),
+          ...(archived !== undefined && { archived }),
         },
       });
 

@@ -3,7 +3,7 @@ import "./NoteItem.css";
 const NoteItem = ({
   note,
   deleteNote,
-  toggleComplete,
+  toggleArchived,
   editingId,
   editingText,
   setEditingText,
@@ -13,7 +13,7 @@ const NoteItem = ({
   const isEditing = editingId === note.id;
 
   return (
-    <div className={`note-card ${note.completed ? "completed" : ""}`}>
+    <div className={`note-card ${note.archived ? "archived" : ""}`}>
       {isEditing ? (
         <div className="edit-container">
           <input
@@ -34,23 +34,23 @@ const NoteItem = ({
 
           <div className="note-actions">
             <button
-              className="btn btn-complete"
-              onClick={() => toggleComplete(note.id)}
-              title="Completar"
+              className="btn btn-archive"
+              onClick={() => toggleArchived(note.id)}
+              title="Archive note"
             >
-              {note.completed ? "Unarchive " : "Archive"}
+              {note.archived ? "Unarchive " : "Archive"}
             </button>
             <button
               className="btn btn-edit"
               onClick={() => startEdit(note)}
-              title="Editar"
+              title="Edit note"
             >
               Edit
             </button>
             <button
               className="btn btn-delete"
               onClick={() => deleteNote(note.id)}
-              title="Eliminar"
+              title="Delete note"
             >
               Delete
             </button>

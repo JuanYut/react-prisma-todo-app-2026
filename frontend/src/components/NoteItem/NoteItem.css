@@ -22,7 +22,7 @@
 }
 
 /* Estilo cuando la tarea está completada */
-.note-card.completed {
+.note-card.archived {
   background-color: #161410;
   border-color: #382e1e;
   width: fit-content; /* La tarjeta solo mide lo que midan sus botones */
@@ -31,7 +31,7 @@
   margin-right: 0;
 }
 
-.note-card.completed .note-title {
+.note-card.archived .note-title {
   text-decoration: line-through;
   color: #837a6b;
   display: none;
@@ -53,4 +53,69 @@
 .note-actions {
   display: flex;
   gap: 6px; /* Espacio entre botones más apretado */
+}
+
+/* Estilo base de botones (Más pequeños) */
+.btn {
+  border: none;
+  border-radius: 5px;
+  padding: 4px 8px; /* Botones más compactos */
+  font-size: 0.75rem; /* Texto de botón pequeño */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: #333; /* Fondo base oscuro */
+}
+
+.btn-archive {
+  color: #fab005; /* Morado vibrante */
+  background-color: rgba(250, 176, 5, 0.1);
+}
+
+.btn-archive:hover {
+  background-color: #fab005;
+  color: #121212; /* Texto oscuro para contraste */
+}
+
+.btn-edit {
+  color: #339af0; /* Azul */
+  background-color: rgba(51, 154, 240, 0.1);
+}
+
+.btn-edit:hover {
+  background-color: #339af0;
+  color: #121212;
+}
+
+.btn-delete {
+  color: #ff6b6b; /* Rojo */
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+.btn-delete:hover {
+  background-color: #ff6b6b;
+  color: #121212;
+}
+
+/* Estilos para el modo edición */
+.edit-container {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+}
+
+.edit-input {
+  flex: 1;
+  padding: 6px 10px;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: white;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.btn-save {
+  background-color: #339af0;
+  color: white;
 }
