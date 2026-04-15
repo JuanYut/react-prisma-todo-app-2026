@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import { handleNotes } from "./routes/notes.js";
+import notesRoutes from "./routes/notes.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -25,20 +25,9 @@ app.use((req, res, next) => {
 });
 
 // routes
-app.all("/{*any}", async (req, res) => {
-  try {
-    const response = await handleNotes(req);
+app.use("/notes", notesRoutes);
 
-    if (response) {
-      return res.status(response.status).json(response.body);
-    }
-
-    return res.status(404).send("Not Found");
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send("Internal Server Error");
-  }
-});
+app.use((req, res) => res.status(404).send("Not Found"));
 
 app.listen(PORT, () => {
   console.log(`Backend running at http://localhost:${PORT}`);
