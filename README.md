@@ -8,13 +8,15 @@ To fulfill the requirements of the challenge, the entire application can be set 
 
 ### One-Command Rule:
 
-**Mac/Linux** — open a terminal in the project root and run:
+Open the terminal in the project root directory and run:
+
+### Mac / Linux / Windows (Git Bash, WSL):
 ```bash
 ./run.sh
 ```
 
-**Windows** — open a Command Prompt or PowerShell in the project root and run:
-```bat
+### Windows (CMD / PowerShell):
+```bash
 run.bat
 ```
 
