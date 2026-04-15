@@ -7,15 +7,15 @@ Created by **Juan Santillán**
 To fulfill the requirements of the challenge, the entire application can be set up and started with **one single command** using the provided automation script.
 
 ### One-Command Rule:
-Open a Bash terminal (Git Bash, WSL, or macOS/Linux Terminal) in the terminal root and run:
 
+**Mac/Linux** — open a terminal in the project root and run:
 ```bash
-bash run.sh
+./run.sh
 ```
 
-*Alternatively, you can also grant execution permissions and run it directly:*
-```bash
-chmod +x run.sh && ./run.sh
+**Windows** — open a Command Prompt or PowerShell in the project root and run:
+```bat
+run.bat
 ```
 
 **What this command does automatically:**

@@ -7,11 +7,15 @@ echo "======================================================="
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# Get the directory where the script is located (works on Mac and Linux)
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+cd "$SCRIPT_DIR"
+
 # ==========================================
 # 1. Backend Setup
 # ==========================================
-echo -e "\n[1/4] Setting up Backend..."
-cd backend
+printf "\n[1/4] Setting up Backend...\n"
+cd "$SCRIPT_DIR/backend"
 
 # Install dependencies
 npm install
@@ -27,13 +31,11 @@ echo "Generating Prisma client and syncing database schema..."
 npx prisma generate
 npx prisma db push
 
-cd ..
-
 # ==========================================
 # 2. Frontend Setup
 # ==========================================
-echo -e "\n[2/4] Setting up Frontend..."
-cd frontend
+printf "\n[2/4] Setting up Frontend...\n"
+cd "$SCRIPT_DIR/frontend"
 
 # Install dependencies
 npm install
@@ -44,32 +46,34 @@ if [ ! -f .env ] && [ -f .env.example ]; then
   cp .env.example .env
 fi
 
-cd ..
-
 # ==========================================
 # 3. Running Applications
 # ==========================================
-echo -e "\n[3/4] Starting the applications..."
+printf "\n[3/4] Starting the applications...\n"
 
 # Trap CTRL+C to kill background processes gracefully
-trap 'echo -e "\nStopping servers..."; kill $BACKEND_PID $FRONTEND_PID; exit' SIGINT SIGTERM
+cleanup() {
+  echo ""
+  echo "Stopping servers..."
+  kill $BACKEND_PID $FRONTEND_PID 2>/dev/null
+  exit 0
+}
+trap cleanup SIGINT SIGTERM
 
-cd backend
+cd "$SCRIPT_DIR/backend"
 echo "Starting Backend on http://localhost:3001..."
 npm run start &
 BACKEND_PID=$!
-cd ..
 
-cd frontend
+cd "$SCRIPT_DIR/frontend"
 echo "Starting Frontend..."
 npm run dev &
 FRONTEND_PID=$!
-cd ..
 
-echo -e "\n[4/4] Validation..."
-echo "✅ App is successfully running!"
-echo "➡️  Frontend should be accessible at: http://localhost:5173"
-echo "➡️  Backend API is listening at: http://localhost:3001"
+printf "\n[4/4] Validation...\n"
+echo "App is successfully running!"
+echo "  Frontend should be accessible at: http://localhost:5173"
+echo "  Backend API is listening at: http://localhost:3001"
 echo "Press Ctrl+C to stop both servers."
 
 # Wait for background processes to keep script running
