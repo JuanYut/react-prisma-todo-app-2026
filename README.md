@@ -12,7 +12,7 @@ Open the terminal in the project root directory and run:
 
 ### Mac / Linux / Windows (Git Bash, WSL):
 ```bash
-./run.sh
+sh ./run.sh
 ```
 
 ### Windows (CMD / PowerShell):
