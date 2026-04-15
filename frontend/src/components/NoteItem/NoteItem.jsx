@@ -18,6 +18,8 @@ const NoteItem = ({
         <div className="edit-container">
           <input
             className="edit-input"
+            name="Edit note"
+            id="edit-note"
             value={editingText}
             onChange={(e) => setEditingText(e.target.value)}
             autoFocus

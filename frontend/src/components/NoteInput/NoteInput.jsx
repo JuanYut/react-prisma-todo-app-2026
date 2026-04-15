@@ -17,6 +17,8 @@ const NoteInput = ({ addNote }) => {
         className="note-input-field"
         type="text"
         placeholder="New note"
+        name="New note"
+        id="new-note"
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
